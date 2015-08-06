@@ -22,7 +22,7 @@ def post_new(request):
             post.published_date = timezone.now()
             post.save()
             #return redirect('ogevents.views.post_detail', pk=post.pk)
-            return redirect('ogevents.views.post_list')
+            return redirect('ogevents.views.post_list', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'ogevents/post_edit.html', {'form': form})
@@ -38,7 +38,7 @@ def post_edit(request, pk):
             post.published_date = timezone.now()
             post.save()
             #return redirect('ogevents.views.post_detail', pk=post.pk)
-            return redirect('ogevents.views.post_list')
+            return redirect('ogevents.views.post_list', pk=post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'ogevents/post_edit.html', {'form': form})

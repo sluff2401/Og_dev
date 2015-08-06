@@ -4,6 +4,5 @@
     {% for post in posts %}
             <h2 class="date" ><a class="date" href="{% url "post_detail" pk=post.pk %}">{{ post.title|date:"l jS F Y" }}</a></h2>
             <h2 class="item">{{ post.text|linebreaks }}</h2>
-	    <hr>
     {% endfor %}
 {% endblock content %}
