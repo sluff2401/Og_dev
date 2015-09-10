@@ -1,9 +1,21 @@
 {% extends "ogevents/base.html" %}
 
 {% block content %}
+  {% if user.is_authenticated %}
+    {% comment %}
+    <a class="top-menu" href="{% url 'post_new' %}" >Add Event</span></a>
+    {% endcomment %}
+    <a class="btn btn-default" href="{% url 'post_new' %}" >Click here to add a new event</span></a>
     {% for post in posts %}
             <h2 class="date" ><a class="date" href="{% url "post_detail" pk=post.pk %}">{{ post.title|date:"l jS F Y" }}</a></h2>
             <h2 class="item">{{ post.text|linebreaks }}</h2>
 	    <hr>
     {% endfor %}
+  {% else %}
+    {% for post in posts %}
+            <h2 class="date" >{{ post.title|date:"l jS F Y" }}</h2>
+            <h2 class="item">{{ post.text|linebreaks }}</h2>
+	    <hr>
+    {% endfor %}
+  {% endif %}
 {% endblock content %}

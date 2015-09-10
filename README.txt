@@ -1,3 +1,1 @@
-This contains files downloaded from ogradydev on pyany and consisted
-of the djg tutorial, but has been amended to be the a development version of the og
-website.
+As of 20/08/15 was the live version, but is now for development.

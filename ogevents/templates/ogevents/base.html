@@ -77,15 +77,21 @@
 </head>
 <body>
     {% if user.is_authenticated %}
+	{% comment %}
         <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+        <a href="{% url 'post_new' %}" class="top-menu">Add Event</span></a>
+	{% endcomment %}
 	{% comment %}
         <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
 	{% endcomment %}
         <p class="top-menu">Hello {{ user.username }}<small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
      {% else %}
+	{% comment %}
+        <p class="top-menu"><small>(<a href="{% url 'django.contrib.auth.views.login' %}">Log in</a>)</small></p>
+	{% endcomment %}
         <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
     {% endif %}
-    <h1><a href="{% url 'ogevents.views.post_list' %}">Ogrady Court Social Club programme</a></h1>
+    <h1><a href="{% url 'ogevents.views.post_list' %}">O'Grady Court Social Club programme dev version</a></h1>
     <hr>
       {% block content %}
       {% endblock %}
