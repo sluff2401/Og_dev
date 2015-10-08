@@ -1,13 +1,15 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
-from .models import Post
-from .forms import PostForm
+from django.shortcuts                     import render, get_object_or_404, redirect
+from django.utils                         import timezone
+from django.contrib.auth.decorators       import login_required
+from django.contrib.auth.models           import User
+from .models                              import Post
+from .forms                               import PostForm
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('title')
+    posts = Post.objects.filter(status=True).order_by('title')
     return render(request, 'ogevents/post_list.html', {'posts': posts})
 
+@login_required
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'ogevents/post_detail.html', {'post': post})
@@ -18,11 +20,12 @@ def post_new(request):
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
+            user = User.objects.get(id=request.user.id)
+            post.author_name = user.username
             post.author = request.user
-            post.published_date = timezone.now()
+            #post.published_date = timezone.now()
             post.save()
-            #return redirect('ogevents.views.post_detail', pk=post.pk)
-            return redirect('ogevents.views.post_list', pk=post.pk)
+            return redirect('ogevents.views.post_list')
     else:
         form = PostForm()
     return render(request, 'ogevents/post_edit.html', {'form': form})
@@ -34,29 +37,29 @@ def post_edit(request, pk):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
+            user = User.objects.get(id=request.user.id)
+            post.author_name = user.username
             post.author = request.user
-            post.published_date = timezone.now()
+            #post.published_date = timezone.now()
             post.save()
-            #return redirect('ogevents.views.post_detail', pk=post.pk)
-            return redirect('ogevents.views.post_list', pk=post.pk)
+            return redirect('ogevents.views.post_list')
     else:
         form = PostForm(instance=post)
     return render(request, 'ogevents/post_edit.html', {'form': form})
 
 @login_required
-def post_draft_list(request):
-    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
-    return render(request, 'ogevents/post_draft_list.html', {'posts': posts})
-
-@login_required
-def post_publish(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.publish()
-    return redirect('ogevents.views.post_detail', pk=pk)
-
-@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    post.delete()
-    return redirect('ogevents.views.post_list')
-
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post             = form.save(commit=False)
+            user             = User.objects.get(id=request.user.id)
+            post.author_name = user.username
+            post.author      = request.user
+            post.status      = False
+            post.save()
+            return redirect('ogevents.views.post_list')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'ogevents/post_edit.html', {'form': form})

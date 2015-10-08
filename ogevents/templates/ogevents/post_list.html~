@@ -1,21 +1,25 @@
 {% extends "ogevents/base.html" %}
 
 {% block content %}
-  {% if user.is_authenticated %}
-    {% comment %}
-    <a class="top-menu" href="{% url 'post_new' %}" >Add Event</span></a>
-    {% endcomment %}
-    <a class="btn btn-default" href="{% url 'post_new' %}" >Add Event</span></a>
+    {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'post_new' %}" >Click here to add a new event to the website</span></a>
+    {% endif %}
+    <p>________________________________________________________________________________________________________________________________________________________</p>
     {% for post in posts %}
-            <h2 class="date" ><a class="date" href="{% url "post_detail" pk=post.pk %}">{{ post.title|date:"l jS F Y" }}</a></h2>
-            <h2 class="item">{{ post.text|linebreaks }}</h2>
-	    <hr>
+            {% if user.is_authenticated %}
+                <h2 class="date" >{{ post.title|date:"l jS F Y" }}</h2>
+                <a class="btn btn-default" href="{% url "post_edit" pk=post.pk %}">Click here to make a change to this event</span></a>
+                <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}">Click here to remove this event from the website</span></a>
+            {% else %}
+                <h2 class="date" >{{ post.title|date:"l jS F Y" }}</h2>
+            {% endif %}
+            {% if post.author_name == "hughc" %}
+                <h2 class="hughc">{{ post.text|linebreaks }}</h2>
+            {% else %}
+                <h2 class="item">{{ post.text|linebreaks }}</h2>
+            {% endif %}
+            <p>________________________________________________________________________________________________________________________________________________________</p>
     {% endfor %}
-  {% else %}
-    {% for post in posts %}
-            <h2 class="date" >{{ post.title|date:"l jS F Y" }}</h2>
-            <h2 class="item">{{ post.text|linebreaks }}</h2>
-	    <hr>
-    {% endfor %}
-  {% endif %}
 {% endblock content %}
+                {% comment %}
+                {% endcomment %}
