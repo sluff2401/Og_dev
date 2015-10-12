@@ -50,17 +50,5 @@ def post_edit(request, pk):
 @login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            post             = form.save(commit=False)
-            user             = User.objects.get(id=request.user.id)
-            post.author_name = user.username
-            post.author      = request.user
-            post.status      = False
-            post.save()
-            return redirect('ogevents.views.post_list')
-    else:
-        form = PostForm(instance=post)
+    post.delete()
     return redirect('ogevents.views.post_list')
-    #return render(request, 'ogevents/post_edit.html', {'form': form})
