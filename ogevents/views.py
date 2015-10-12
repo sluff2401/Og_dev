@@ -62,4 +62,5 @@ def post_remove(request, pk):
             return redirect('ogevents.views.post_list')
     else:
         form = PostForm(instance=post)
-    return render(request, 'ogevents/post_edit.html', {'form': form})
+    return redirect('ogevents.views.post_list')
+    #return render(request, 'ogevents/post_edit.html', {'form': form})
