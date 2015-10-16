@@ -23,7 +23,6 @@ def post_new(request):
             user = User.objects.get(id=request.user.id)
             post.author_name = user.username
             post.author = request.user
-            #post.published_date = timezone.now()
             post.save()
             return redirect('ogevents.views.post_list')
     else:
@@ -40,7 +39,6 @@ def post_edit(request, pk):
             user = User.objects.get(id=request.user.id)
             post.author_name = user.username
             post.author = request.user
-            #post.published_date = timezone.now()
             post.save()
             return redirect('ogevents.views.post_list')
     else:

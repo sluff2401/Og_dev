@@ -17,8 +17,27 @@
       font-family: 'Arial';
       text-align:center;
       text-decoration: none;
-
     }
+
+    .ogrady {
+      color:               #0000c0;
+      background-color:    #F3FFF3;
+      font-style:          normal;
+    }
+
+    .hughc {
+      color:               #00b000;
+      background-color:    #F3FFF3;
+      font-style:          normal;
+    }
+
+    .hopley {
+      color:               #b06000;
+      background-color:    #F3FFF3;
+      font-style:          normal;
+    }
+
+
 
     h2 a, h2 a:visited {
       color: #000000;
@@ -28,16 +47,15 @@
       text-align:center;
     }
 
-    h2.date a, h2.date a:visited {
+    h2.date, h2.date:visited {
       color: #000000;
       background-color:#F3FFF3;
       font-size: x-large;
       font-weight:bold;
-      text-align:center;
       padding-left:15px;
     }
 
-    h2.item , h2.item :visited {
+    h2.ogrady , h2.item :visited {
       color: #0000c0;
       background-color:#F3FFF3;
       font-size: x-large;
@@ -47,6 +65,14 @@
 
     h2.hughc , h2.hughc :visited {
       color: #00b000;
+      background-color:#F3FFF3;
+      font-size: x-large;
+      font-weight:bold;
+      padding-left:15px;
+    }
+
+    h2.hopley , h2.hopley :visited {
+      color: #b06000;
       background-color:#F3FFF3;
       font-size: x-large;
       font-weight:bold;
@@ -95,20 +121,14 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-	{% comment %}
-        <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-        <a href="{% url 'post_new' %}" class="top-menu">Add Event</span></a>
-	{% endcomment %}
         <p class="top-menu"><small>(<a href="{% url 'django.contrib.auth.views.logout' %}">Log out</a>)</small></p>
-     {% else %}
-	{% comment %}
-        <p class="top-menu"><small>(<a href="{% url 'django.contrib.auth.views.login' %}">Log in</a>)</small></p>
-	{% endcomment %}
+    {% else %}
         <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
     {% endif %}
-    <h1><a href="{% url 'ogevents.views.post_list' %}">O'Grady, Hugh Clarke & Hopley Social Clubs programmes</a></h1>
+    <h1><em class="ogrady">O'Grady</em>, <em class="hughc">Hugh Clarke</em> & <em class="hopley">Hopley</em> Social Clubs programmes</h1>
     <hr>
       {% block content %}
       {% endblock %}
 </body>
 </html>
+

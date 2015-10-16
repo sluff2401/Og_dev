@@ -9,12 +9,9 @@ class Post(models.Model):
     text         = models.TextField('Event details')
     created_date = models.DateTimeField(default=timezone.now)
     status       = models.BooleanField(default=True)
-    #published_date = models.DateTimeField(
-           #blank=True, null=True)
     def __str__(self):               
         return self.text
     def publish(self):
-        #self.published_date = timezone.now()
         self.save()
 
   
