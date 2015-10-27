@@ -15,8 +15,16 @@
             {% endif %}
             {% if post.author_name == "hughc" %}
                 <h2 class="hughc">{{ post.text|linebreaks }}</h2>
+            {% elif post.author_name == "hughcsocial" %}
+                <h2 class="hughc">{{ post.text|linebreaks }}</h2>
             {% elif post.author_name == "hopley" %}
                 <h2 class="hopley">{{ post.text|linebreaks }}</h2>
+            {% elif post.author_name == "hopleysocial" %}
+                <h2 class="hopley">{{ post.text|linebreaks }}</h2>
+            {% elif post.author_name == "mabele" %}
+                <h2 class="mabele">{{ post.text|linebreaks }}</h2>
+            {% elif post.author_name == "catalyst" %}
+                <h2 class="catalyst">{{ post.text|linebreaks }}</h2>
             {% else %}
                 <h2 class="ogrady">{{ post.text|linebreaks }}</h2>
             {% endif %}
@@ -25,7 +33,7 @@
                 <h2 class="ogrady">Events in this colour have been posted by O'Grady Court</h2>
                 <h2 class="hughc">Events in this colour have been posted by Hugh Clarke House</h2>
                 <h2 class="hopley">Events in this colour have been posted by Hopley House</h2>
-
+                <h2 class="catalyst">Events in this colour have been posted by Catalyst</h2>
 {% endblock content %}
                 {% comment %}
                 {% endcomment %}
