@@ -141,10 +141,13 @@
     {% else %}
         <a href="{% url 'django.contrib.auth.views.login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
     {% endif %}
-    <h1><em class="ogrady">O'Grady</em>, <em class="hughc">Hugh Clarke</em> & <em class="hopley">Hopley</em> Social Clubs programmes</h1>
+    <h1><em class="ogrady">O'Grady</em>, <em class="hughc">Hugh Clarke</em> & <em class="hopley">Hopley</em><br> Social Clubs programmes</h1>
     <hr>
       {% block content %}
       {% endblock %}
 </body>
 </html>
+{% comment %}
+    <h1><em class="ogrady">O'Grady</em>, <em class="hughc">Hugh Clarke</em> & <em class="hopley">Hopley</em> Social Clubs programmes</h1>
 
+{% endcomment %}
