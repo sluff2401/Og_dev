@@ -4,7 +4,7 @@
     {% if user.is_authenticated %}
         <a class="btn btn-default" href="{% url 'post_new' %}" >Click here to add a new event to the website</span></a>
     {% endif %}
-    <p>__________________________________________________________________________________________________________________________________________________________________</p>
+    <p>_________________________________________________________</p>
     {% for post in posts %}
             {% if user.is_authenticated %}
                 <h2 class="date" >{{ post.title|date:"l jS F Y" }}</h2>
@@ -28,7 +28,7 @@
             {% else %}
                 <h2 class="ogrady">{{ post.text|linebreaks }}</h2>
             {% endif %}
-            <p>__________________________________________________________________________________________________________________________________________________________________</p>
+            <p>_________________________________________________________</p>
     {% endfor %}
                 <h2 class="ogrady">Events in this colour have been posted by O'Grady Court</h2>
                 <h2 class="hughc">Events in this colour have been posted by Hugh Clarke House</h2>
