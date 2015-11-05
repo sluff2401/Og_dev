@@ -6,7 +6,11 @@ from .models                              import Post
 from .forms                               import PostForm
 
 def post_list(request):
-    posts = Post.objects.filter(status=True).order_by('title')
+    posts = Post.objects.filter(status=True,title__gte=timezone.now()).order_by('title')
+    return render(request, 'ogevents/post_list.html', {'posts': posts})
+
+def post_list_past(request):
+    posts = Post.objects.filter(status=True,title__lt=timezone.now()).order_by('-title')
     return render(request, 'ogevents/post_list.html', {'posts': posts})
 
 @login_required
