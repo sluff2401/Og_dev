@@ -1,0 +1,97 @@
+{% extends "ogevents/base.html" %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <a class="btn btn-default" href="{% url 'event_new' %}" >Click here to add a new event to the website</span></a>
+    {% endif %}
+    <p>_________________________________________________________</p>
+    {% for event in events %}
+       <h2 class="date" >{{ event.0.event_date|date:"l jS F Y" }}
+       {% if event.1 = '1' %}
+          <a class="btn btn-default" href="{% url "event_edit" period=period pk=event.0.pk %}">
+          Click here to make a change to this event</span></a>
+          <a class="btn btn-default" href="{% url "event_remove" period=period pk=event.0.pk %}">
+          Click here to remove this event</span></a></h2>
+       {% endif %}
+
+       
+            {% if event.0.author_name == "hughc" %}
+                <h2 class="hughc">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "hughcsocial" %}
+                <h2 class="hughc">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "hopley" %}
+                <h2 class="hopley">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "hopleysocial" %}
+                <h2 class="hopley">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "mabele" %}
+                <h2 class="mabele">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "catalyst" %}
+                <h2 class="catalyst">{{ event.0.event_detail|linebreaks }}</h2>
+            {% else %}
+                <h2 class="ogrady">{{ event.0.event_detail|linebreaks }}</h2>
+            {% endif %}
+ 
+            <p>_________________________________________________________</p>
+    {% endfor %}
+                <h2 class="ogrady">Events in this colour have been posted by O'Grady Court</h2>
+                <h2 class="hughc">Events in this colour have been posted by Hugh Clarke House</h2>
+                <h2 class="hopley">Events in this colour have been posted by Hopley House</h2>
+                <h2 class="catalyst">Events in this colour have been posted by Catalyst</h2>
+{% endblock content %}
+
+
+
+                {% comment %}
+
+<h2 class=event.0.author_name>{{ event.0.event_detail|linebreaks }}</h2>
+
+    {% for event in events %}
+       <h2 class="date" >{{ event.event_date|date:"l jS F Y" }}</h2>
+       {% if user.is_authenticated %}
+          <a class="btn btn-default" href="{% url "event_edit" period=period pk=event.pk %}">
+          Click here to make a change to this event</span></a>
+          <a class="btn btn-default" href="{% url "event_remove" period=period pk=event.pk %}">
+          Click here to remove this event from the website</span></a>
+       {% endif %}
+
+            {% if event.0.author_name == "hughc" %}
+                <h2 class="hughc">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "hughcsocial" %}
+                <h2 class="hughc">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "hopley" %}
+                <h2 class="hopley">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "hopleysocial" %}
+                <h2 class="hopley">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "mabele" %}
+                <h2 class="mabele">{{ event.0.event_detail|linebreaks }}</h2>
+            {% elif event.0.author_name == "catalyst" %}
+                <h2 class="catalyst">{{ event.0.event_detail|linebreaks }}</h2>
+            {% else %}
+                <h2 class="ogrady">{{ event.0.event_detail|linebreaks }}</h2>
+            {% endif %}
+            <p>_________________________________________________________</p>
+    {% endfor %}
+
+
+                {% comment %}
+       <h2 class=event.author_name>{{ event.event_detail|linebreaks }}</h2>
+                {% endcomment %}
+
+
+
+
+
+                {% comment %}
+            {% if user.is_authenticated %}
+                <h2 class="date" >{{ event.event_date|date:"l jS F Y"}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Event evented by {{event.author_name}}with schememanager{{event.schememanager}} </h2>
+                <a class="btn btn-default" href="{% url "event_edit" period=period pk=event.pk %}">Click here to make a change to this event</span></a>
+                <a class="btn btn-default" href="{% url "event_remove" period=period pk=event.pk %}">Click here to remove this event from the website</span></a>
+
+            {% else %}
+                <h2 class="date" >{{ event.event_date|date:"l jS F Y" }}</h2>
+            {% endif %}
+
+
+
+
+                {% endcomment %}
